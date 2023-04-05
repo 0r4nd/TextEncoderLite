@@ -7,8 +7,12 @@ Because I didn't see that the TextEncoder library already existed!<br>
 Finally after renaming the library I wanted to make it the most performant polyfill available (successful)
 
 # Usage
+```javascript
 
-// encode
+var str = "a😆b😆c";
+var res = new Uint8Array(14);
+ 
+// encoder to "utf-8"
 var encoder = new TextEncoderLite("utf-8", { 
                                     //experimental: true,
                                     errorMode: "replace",
@@ -17,5 +21,8 @@ var encoder = new TextEncoderLite("utf-8", {
                                     //errorMode: "xmlcharrefreplace",
                                     //errorMode: "strict",
                                  });
-                                   
 var decoder = new TextDecoderLite("utf-8", {fatal:true, ignoreBOM:true});
+
+var tst = encoder.encodeInto(str, res);
+ 
+```
