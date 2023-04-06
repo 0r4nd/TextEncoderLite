@@ -1,6 +1,6 @@
 # TextEncoderLite
 TextEncoderLite is a "polyfill" library that allows to replace the TextEncoder class of javascript.<br>
-The encoder is 4x to 10x slower than official version (depend of the charset), decoder is 5x slower<br>
+The encoder is 4x to 10x slower than official version (depend of the charset), decoder is 5x to 20x slower<br>
 The library takes almost 300kb in memory (even if the table has been optimized)
 
 Why this library since it already exists?<br>
