@@ -5,7 +5,7 @@ The library takes almost 300kb in memory (even if the table has been optimized)
 
 Why this library since it already exists?<br>
 Because I didn't see that the TextEncoder library already existed!<br>
-Finally after renaming the library I wanted to make it the most performant polyfill available (successful)
+Finally after renaming the library I wanted to make it the most performant polyfill available.
 
 # Usage
 ```javascript
