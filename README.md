@@ -7,7 +7,7 @@ Why this library since it already exists as API?<br>
 Because I didn't see that the TextEncoder API already existed!<br>
 
 # Implementation status
-Encoder.label:
+TextDecoderLite() - label:
 - The recommended encoding for the Web: ✅<br>
 "utf-8"<br><br>
 - The legacy single-byte encodings: ✅<br>
@@ -24,6 +24,20 @@ Encoder.label:
 "utf-16be", "utf-16le", "x-user-defined"<br><br>
 - A special encoding ⭕<br>
 "replacement". This decodes empty input into empty output and any other arbitrary-length input into a single replacement character. It is used to prevent attacks that mismatch encodings between the client and server. The following encodings also map to the replacement encoding: ISO-2022-CN, ISO-2022-CN-ext, "iso-2022-kr", and "hz-gb-2312".
+
+TextEncoderLite() Experimental!:
+- The official TextEncoder API can only encode to "utf-8"
+- if "experimental:true" is set, the module can also encode to (already implemented) labels
+```javascript
+var utf8Enc = new TextEncoderLite(); // default is "utf-8" like API
+var win1252Enc = new TextEncoderLite("windows-1252", {experimental:true});
+var res = new Uint8Array(20);
+
+utf8Enc.encodeInto("hell⚽", res);
+console.log(res);
+win1252Enc.encodeInto("hell⚽", res);
+console.log(res);
+```
 
 # Usage
 ```javascript
