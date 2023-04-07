@@ -24,7 +24,7 @@ function bench() {
     obj1 = enc1.encodeInto(string2, r1);
     obj1 = enc1.encodeInto(string2, r1);
   }
-  console.warn("Time TextEncoder (encode)");
+  console.warn("Time TextEncoder.encodeInto()");
   console.timeEnd();
 
 
@@ -34,15 +34,16 @@ function bench() {
     obj2 = enc2.encodeInto(string2, r2);
     obj2 = enc2.encodeInto(string2, r2);
   }
-  console.warn("Time TextEncoderLite (encode)");
+  console.warn("Time TextEncoderLite.encodeInto()");
   console.timeEnd();
+  console.log("\n");
 
 
   console.time();
   for (var i = 0; i < 20000; i++) {
     obj3 = dec1.decode(r1);
   }
-  console.warn("Time TextEncoder (decode)");
+  console.warn("Time TextDecoder.decode()");
   console.timeEnd();
 
 
@@ -50,7 +51,7 @@ function bench() {
   for (var i = 0; i < 20000; i++) {
     obj4 = dec2.decode(r1);
   }
-  console.warn("Time TextEncoderLite (decode)");
+  console.warn("Time TextDecoderLite.decode()");
   console.timeEnd();
 
 
