@@ -24,7 +24,6 @@ Because I didn't see that the TextEncoder API already existed!<br>
 "utf-16be", "utf-16le", "x-user-defined"<br><br>
 - A special encoding ⭕<br>
 "replacement". This decodes empty input into empty output and any other arbitrary-length input into a single replacement character. It is used to prevent attacks that mismatch encodings between the client and server. The following encodings also map to the replacement encoding: ISO-2022-CN, ISO-2022-CN-ext, "iso-2022-kr", and "hz-gb-2312".
-<br>
 
 ### TextEncoderLite() - experimental:
 - The official TextEncoder API can only encode to "utf-8"
