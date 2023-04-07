@@ -1,7 +1,6 @@
 # TextEncoderLite
 TextEncoderLite is a Polyfill that allows to replace the [TextEncoder API](https://developer.mozilla.org/en-US/docs/Web/API/Encoding_API) of javascript.<br>
-This encoder is 4x to 10x slower than API (depend of the charset and usage of V8 or Spidermonkey), decoder is 5x to 10x slower.<br>
-The module takes almost 150kb in memory (even if the table has been optimized)
+This encoder is 4x to 10x slower than API (depend of the charset and usage of V8 or Spidermonkey), decoder is 5x to 10x slower. The module takes almost 150kb in memory (even if the table has been optimized)
 
 Why this library since it already exists as API?<br>
 Because I didn't see that the TextEncoder API already existed!<br>
