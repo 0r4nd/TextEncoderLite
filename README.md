@@ -23,7 +23,7 @@ Encoder.label:
 - The legacy miscellaneous encodings: ⭕<br>
 "utf-16be", "utf-16le", "x-user-defined"<br><br>
 - A special encoding ⭕<br>
-'replacement'. This decodes empty input into empty output and any other arbitrary-length input into a single replacement character. It is used to prevent attacks that mismatch encodings between the client and server. The following encodings also map to the replacement encoding: ISO-2022-CN, ISO-2022-CN-ext, 'iso-2022-kr', and 'hz-gb-2312'.
+"replacement". This decodes empty input into empty output and any other arbitrary-length input into a single replacement character. It is used to prevent attacks that mismatch encodings between the client and server. The following encodings also map to the replacement encoding: ISO-2022-CN, ISO-2022-CN-ext, "iso-2022-kr", and "hz-gb-2312".
 
 # Usage
 ```javascript
@@ -31,14 +31,7 @@ Encoder.label:
 var str = "a😆b😆c";
 var res = new Uint8Array(14);
  
-var encoder = new TextEncoderLite("utf-8", { 
-                                    //experimental: true,
-                                    errorMode: "replace",
-                                    //errorMode: "ignore",
-                                    //errorMode: "backslashreplace",
-                                    //errorMode: "xmlcharrefreplace",
-                                    //errorMode: "strict",
-                                 });
+var encoder = new TextEncoderLite();
 var decoder = new TextDecoderLite("utf-8", {fatal:true, ignoreBOM:true});
 
 var tst = encoder.encodeInto(str, res);
