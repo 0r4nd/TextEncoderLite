@@ -670,6 +670,19 @@ const [UTF8Encoder, UTF8Decoder] = (function() {
     get() { return internal(this).errorMode; }
   });
 
+  // à tester
+  UTF8Decoder.prototype.decodeToString = function(buffer, options = {}) {
+    var opts = utf8_opts(buffer);
+    if (!opts) return null;
+    var cberror = utf8_decoder_cbError(this.fatal);
+    if (!options.stream) {
+      var s = "";
+      utf8_forEach(opts.src, function(cp){s+=String.fromCodePoint(cp);}, cberror, this.ignoreBOM);
+      return s;
+    }
+  };
+  UTF8Decoder.prototype.decode = UTF8Decoder.prototype.decodeToString;
+
 
   return [UTF8Encoder, UTF8Decoder];
 })();
