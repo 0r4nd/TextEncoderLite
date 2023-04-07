@@ -670,7 +670,6 @@ const [UTF8Encoder, UTF8Decoder] = (function() {
     get() { return internal(this).errorMode; }
   });
 
-  // à tester
   UTF8Decoder.prototype.decodeToString = function(buffer, options = {}) {
     var opts = utf8_opts(buffer);
     if (!opts) return null;
@@ -682,6 +681,35 @@ const [UTF8Encoder, UTF8Decoder] = (function() {
     }
   };
   UTF8Decoder.prototype.decode = UTF8Decoder.prototype.decodeToString;
+
+
+  UTF8Decoder.prototype.decodeToUTF16 = function(buffer, options = {}) {
+    var opts = utf8_opts(buffer);
+    if (!opts) return null;
+    // decode utf16 => encode utf8
+    var cberror = utf8_decoder_cbError(this.fatal);
+    var cberror16 = ()=>{}//this.fatal? utf16_encoder_strictError : utf16_encoder_replaceError;
+    var pos = 0;
+    var cb = cp => pos += utf16_encodeCodePoint(cp,uint16Array,pos,cberror16);
+
+    if (!options.stream) {
+      var uint16Array = new Uint16Array(opts.src.length * 2);
+      utf8_forEach(opts.src, cb, cberror, this.ignoreBOM);
+      return uint16Array.slice(0,pos);
+    }
+  };
+
+  UTF8Decoder.prototype.decodeToUTF32 = function(buffer, options = {}) {
+    var opts = utf8_opts(buffer);
+    if (!opts) return null;
+    var cberror = utf8_decoder_cbError(this.fatal);
+    // decode utf8 => encode utf32
+    if (!options.stream) {
+      var uint32Array = new Uint32Array(opts.src.length);
+      var written = utf8_forEach(opts.src, function(c,i){uint32Array[i]=c;}, cberror, this.ignoreBOM);
+      return uint32Array.slice(0,written);
+    }
+  };
 
 
   return [UTF8Encoder, UTF8Decoder];
@@ -782,11 +810,8 @@ const [UTF8Encoder, UTF8Decoder] = (function() {
 */
 
 
-
-
   //UTF8.decodeCodePointFast = utf8_decodeCodePointFast;
   //UTF8.decodeCodePoint = utf8_decodeCodePoint;
-
 
 /*
   UTF8Decoder.prototype.codePointLength = function(buffer) {
@@ -802,42 +827,4 @@ const [UTF8Encoder, UTF8Decoder] = (function() {
     return utf8_forEach(opts.src, cb, cberror, this.ignoreBOM);
   };
 
-  UTF8Decoder.prototype.decodeToString = function(buffer, options = {}) {
-    var opts = utf8_opts(buffer);
-    if (!opts) return null;
-    var cberror = utf8_decoder_cbError(this.fatal);
-    if (!options.stream) {
-      var s = "";
-      utf8_forEach(opts.src, function(cp){s+=String.fromCodePoint(cp);}, cberror, this.ignoreBOM);
-      return s;
-    }
-  };
-
-  UTF8Decoder.prototype.decodeToUTF16 = function(buffer, options = {}) {
-    var opts = utf8_opts(buffer);
-    if (!opts) return null;
-    // decode utf16 => encode utf8
-    var cberror = utf8_decoder_cbError(this.fatal);
-    var cberror16 = ()=>{}//this.fatal? utf16_encoder_strictError : utf16_encoder_replaceError;
-    var pos = 0;
-    var cb = cp => pos += utf16_encodeCodePoint(cp,uint16Array,pos,cberror16);
-
-    if (!options.stream) {
-      var uint16Array = new Uint16Array(opts.src.length * 2);
-      utf8_forEach(opts.src, cb, cberror, this.ignoreBOM);
-      return uint16Array.slice(0,pos);
-    }
-  };
-
-  UTF8Decoder.prototype.decodeToUTF32 = function(buffer, options = {}) {
-    var opts = utf8_opts(buffer);
-    if (!opts) return null;
-    var cberror = utf8_decoder_cbError(this.fatal);
-    // decode utf8 => encode utf32
-    if (!options.stream) {
-      var uint32Array = new Uint32Array(opts.src.length);
-      var written = utf8_forEach(opts.src, function(c,i){uint32Array[i]=c;}, cberror, this.ignoreBOM);
-      return uint32Array.slice(0,written);
-    }
-  };
 */
