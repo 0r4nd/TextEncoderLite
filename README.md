@@ -3,8 +3,7 @@ This is a Polyfill that allows to replace the [TextEncoder API](https://develope
 Why this library since it already exists as API? Because I didn't see that the TextEncoder API already existed!<br>
 
 # Performance
-- The encoder is 4x to 10x slower than API (depend of the charset and usage of V8 or Spidermonkey)
-- The decoder is 5x to 10x slower than API
+- The encoder/decoder are 4x to 10x slower than API (depend of the charset and usage of V8 or Spidermonkey)
 - The module takes ~150kb in memory (the tables have been optimized)
 
 # Implementation status
