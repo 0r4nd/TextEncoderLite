@@ -40,7 +40,7 @@ console.log(res);
 
 // encoding can generate errors, "errorMode" define an error handling mode.
 // "strict"             Raises an exception if the data cannot be converted.
-// "replace"            Substitutes a special marker character for data that cannot be encoded.
+// "replace"            Substitutes a special marker character ("?") for data that cannot be encoded.
 // "ignore"             Skips the data.
 // "xmlcharrefreplace"  XML character (encoding only)
 // "backslashreplace"   escape sequence (encoding only)
