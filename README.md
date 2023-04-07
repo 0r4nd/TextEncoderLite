@@ -40,15 +40,15 @@ console.log(res);
 
 // encoding can generate errors, "errorMode" define an error handling mode.
 // "strict"             Raises an exception if the data cannot be converted.
-// "replace"            Substitutes a special marker character ("?") for data that cannot be encoded.
+// "replace"            Substitutes a special marker character ("?" or "�" according to the label) for data that cannot be encoded.
 // "ignore"             Skips the data.
-// "xmlcharrefreplace"  XML character (encoding only)
-// "backslashreplace"   escape sequence (encoding only)
-var greekEnc = new TextEncoderLite("greek8", {experimental:true, errorMode:"replace"});
+// "xmlcharrefreplace"  XML character (exemple: "&#55296;&#55296;") (encoding only)
+// "backslashreplace"   escape sequence (exemple: "\\uFFFD\\uFFFD") (encoding only)
+var greekEnc = new TextEncoderLite("greek8", {experimental:true, errorMode:"backslashreplace"});
 greekEnc.encodeInto("hell⚽", res);
 console.log(res);
 ```
-
+      
 # Usage
 ```javascript
 
