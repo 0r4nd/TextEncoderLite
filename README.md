@@ -4,7 +4,7 @@ Why this library since it already exists as API? Because I didn't see that the T
 
 # Performance
 - The encoder/decoder are 4x to 10x slower than API (depend of the charset and usage of V8 or Spidermonkey)
-- The module takes ~150kb in memory (the tables have been optimized)
+- The module takes ~150kb in memory (the tables have been optimized with [this tool](https://github.com/0r4nd/ArrayOptimiser))
 
 # Implementation status
 ### TextDecoderLite() - label:
